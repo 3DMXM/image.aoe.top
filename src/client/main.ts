@@ -1,9 +1,14 @@
-import "./style.css";
+import { createApp } from "vue";
+import router from './router'
+import { vuetify } from './plugins/vuetify'
+import App from "./App.vue";
+
 import 'element-plus/dist/index.css'
 import 'element-plus/theme-chalk/dark/css-vars.css'
 
-import { createApp } from "vue";
+const app = createApp(App)
 
-import App from "./App.vue";
+app.use(router)
+app.use(vuetify)
 
-createApp(App).mount("#app");
+app.mount("#app");

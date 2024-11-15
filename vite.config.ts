@@ -22,6 +22,7 @@ export default defineConfig({
 
         }),
         Components({
+            dirs: ['src/client/components'],
             resolvers: [
                 ElementPlusResolver(),
                 // 自动注册图标组件
@@ -34,4 +35,10 @@ export default defineConfig({
             autoInstall: true,
         }),
     ],
+    // 隐射 @ 到 /src
+    resolve: {
+        alias: {
+            "@": "/src",
+        },
+    },
 });
