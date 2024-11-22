@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import bodyParser from 'body-parser';
 import multer from 'multer';
 import fs from 'fs'
+import cors from 'cors'
 
 import { OneDrive } from "./OneDrive.js";
 
@@ -18,6 +19,8 @@ app.use(express.json());
 // 解析 application/x-www-form-urlencoded 类型的请求体
 
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.options("*", cors())
 
 app.get("/hello", (_, res) => {
     res.send("Hello Vite + Vue + TypeScript!");
@@ -73,7 +76,6 @@ app.post("/uploadImg", upload.single('image'), async (req, res) => {
     } else {
         res.json({ code: 400, msg: '获取 access_token 失败' });
     }
-
 })
 
 
