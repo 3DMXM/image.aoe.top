@@ -25,12 +25,17 @@ const upload = () => {
 }
 
 function copy() {
-    let link = location.href + imageUrl.value
-    navigator.clipboard.writeText(link).then(function () {
-        ElMessage.success('复制成功')
-    }).catch(function () {
+    try {
+        let link = location.href + imageUrl.value
+        navigator.clipboard.writeText(link).then(function () {
+            ElMessage.success('复制成功')
+        }).catch(function () {
+            ElMessage.error('复制失败')
+        })
+    }
+    catch (e) {
         ElMessage.error('复制失败')
-    })
+    }
 }
 </script>
 <template>
@@ -42,9 +47,9 @@ function copy() {
                     <el-icon-upload />
                 </el-icon>
             </el-button>
-            <el-button v-if="imageUrl" @click="copy">复制图片地址</el-button>
         </div>
         <div class="image" v-if="imageUrl">
+            <el-button class="copy" @click="copy">复制图片地址</el-button>
             <el-image class="image-src" :src="imageUrl"></el-image>
         </div>
     </div>
@@ -69,6 +74,16 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    // 添加边框
+    border: 1px solid #ebeef5;
+    padding: 10px;
+
+    .copy {
+        position: relative;
+        right: 0;
+        text-align: right;
+    }
 
     .image-src {
         min-width: 200px;
